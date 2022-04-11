@@ -30,7 +30,6 @@ class App extends React.Component {
     const { name, describe, attr1, attr2, attr3, img, select, check } = this.state;
     return (
       <div>
-        <h1>Tryunfo</h1>
         <Form
           cardName={ name }
           cardDescription={ describe }
@@ -41,7 +40,6 @@ class App extends React.Component {
           cardRare={ select }
           cardTrunfo={ check }
         />
-
         <Card
           cardName={ name }
           cardDescription={ describe }
