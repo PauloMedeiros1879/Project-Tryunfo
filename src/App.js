@@ -14,12 +14,12 @@ class App extends React.Component {
       attr3: 0,
       select: 'normal',
       trunfo: false,
-      // isSaveButtonDisabled: true,
+      isSaveButtonDisabled: true,
     };
 
     this.onInputChange = this.onInputChange.bind(this);
     // this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
-    // this.buttonValidate = this.buttonValidate.bind(this);
+    // this.formValidate = this.formValidate.bind(this);
   }
 
   onInputChange({ target }) {
@@ -31,7 +31,8 @@ class App extends React.Component {
 
   // onSaveButtonClick(event) {
   //   event.preventDefault();
-  //   if (buguei) {
+  //   const { name, describe, attr1, attr2, attr3, img, select, trunfo} = this.state;
+  //   if () {
   //     this.setState(() => ({
   //       name: '',
   //       img: '',
@@ -40,35 +41,52 @@ class App extends React.Component {
   //       attr2: 0,
   //       attr3: 0,
   //       select: 'normal',
-  //       check: false,
+  //       trunfo: false,
+  //       isSaveButtonDisabled: true,
   //     }));
   //   }
   // }
 
-  // buttonValidate() {
-  //   const { cardName, cardDescription, cardImage, cardRare } = this.state;
-  //   total = 210
-  //   max = 90
-  //   min = 0
-  //   if (
-  //     cardName,
-  //     && cardDescription,
-  //     && cardImage,
-  //     && cardRare,
-  //   ) {
-  //     this.setState({
-  //       isSaveButtonDisabled: false,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       isSaveButtonDisabled: true,
-  //     });
-  //   }
-  // }
+  buttonValidate(attr, input) {
+    const elements = attr.map((e) => Number(e));
+    const maxTotal = 210;
+    const max = 90;
+    const min = 0;
+    let validate;
+    let totalAttr = elements[0] + elements[1] + elements[2];
+
+    if (input[0] && input[1] && input[2]) {
+      validate = false;
+    } else {
+      return true;
+    }
+    if (totalAttr <= maxTotal) {
+      validate = false;
+    } else {
+      return true;
+    }
+    elements.forEach((element) => {
+      totalAttr += element;
+      if (element >= min && element <= max) {
+        return false;
+      }
+      validate = true;
+    });
+    return validate;
+  }
+
+  formValidate() {
+    const { name, describe, attr1, attr2, attr3, img } = this.state;
+    const attr = [attr1, attr2, attr3];
+    const input = [name, describe, img];
+    this.setState({
+      isSaveButtonDisabled: this.buttonValidate(attr, input),
+    });
+  }
 
   render() {
     const { name, describe, attr1, attr2, attr3, img,
-      select, trunfo } = this.state;
+      select, trunfo, isSaveButtonDisabled } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -84,6 +102,8 @@ class App extends React.Component {
           cardTrunfo={ trunfo }
           hasTrunfo={ trunfo }
           onInputChange={ this.onInputChange }
+          // onSaveButtonClick={ this.onSaveButtonClick }
+          isSaveButtonDisabled={ isSaveButtonDisabled }
         />
 
         <Card
