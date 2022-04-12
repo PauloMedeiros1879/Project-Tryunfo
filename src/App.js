@@ -14,10 +14,12 @@ class App extends React.Component {
       attr3: 0,
       select: 'normal',
       check: false,
-      isSaveButtonDisabled: true,
+      hasTrunfo: false,
+      // isSaveButtonDisabled: true,
     };
 
     this.onInputChange = this.onInputChange.bind(this);
+    // this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     // this.buttonValidate = this.buttonValidate.bind(this);
   }
 
@@ -27,6 +29,22 @@ class App extends React.Component {
       [name]: (type === 'checkbox' ? checked : value),
     });
   }
+
+  // onSaveButtonClick(event) {
+  //   event.preventDefault();
+  //   if (buguei) {
+  //     this.setState(() => ({
+  //       name: '',
+  //       img: '',
+  //       describe: '',
+  //       attr1: 0,
+  //       attr2: 0,
+  //       attr3: 0,
+  //       select: 'normal',
+  //       check: false,
+  //     }));
+  //   }
+  // }
 
   // buttonValidate() {
   //   const { cardName, cardDescription, cardImage, cardRare } = this.state;
@@ -51,7 +69,7 @@ class App extends React.Component {
 
   render() {
     const { name, describe, attr1, attr2, attr3, img,
-      select, check, isSaveButtonDisabled } = this.state;
+      select, check, hasTrunfo } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -65,7 +83,7 @@ class App extends React.Component {
           cardImage={ img }
           cardRare={ select }
           cardTrunfo={ check }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
+          hasTrunfo={ hasTrunfo }
           onInputChange={ this.onInputChange }
         />
         <Card
