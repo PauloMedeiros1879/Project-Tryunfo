@@ -7,16 +7,18 @@ class App extends React.Component {
     super();
     this.state = {
       name: '',
+      img: '',
       describe: '',
       attr1: 0,
       attr2: 0,
       attr3: 0,
-      img: '',
       select: 'normal',
       check: false,
+      isSaveButtonDisabled: true,
     };
 
     this.onInputChange = this.onInputChange.bind(this);
+    // this.buttonValidate = this.buttonValidate.bind(this);
   }
 
   onInputChange({ target }) {
@@ -26,10 +28,34 @@ class App extends React.Component {
     });
   }
 
+  // buttonValidate() {
+  //   const { cardName, cardDescription, cardImage, cardRare } = this.state;
+  //   total = 210
+  //   max = 90
+  //   min = 0
+  //   if (
+  //     cardName,
+  //     && cardDescription,
+  //     && cardImage,
+  //     && cardRare,
+  //   ) {
+  //     this.setState({
+  //       isSaveButtonDisabled: false,
+  //     });
+  //   } else {
+  //     this.setState({
+  //       isSaveButtonDisabled: true,
+  //     });
+  //   }
+  // }
+
   render() {
-    const { name, describe, attr1, attr2, attr3, img, select, check } = this.state;
+    const { name, describe, attr1, attr2, attr3, img,
+      select, check, isSaveButtonDisabled } = this.state;
     return (
       <div>
+        <h1>Tryunfo</h1>
+        <h2>Adicionar nova carta</h2>
         <Form
           cardName={ name }
           cardDescription={ describe }
@@ -39,6 +65,8 @@ class App extends React.Component {
           cardImage={ img }
           cardRare={ select }
           cardTrunfo={ check }
+          isSaveButtonDisabled={ isSaveButtonDisabled }
+          onInputChange={ this.onInputChange }
         />
         <Card
           cardName={ name }

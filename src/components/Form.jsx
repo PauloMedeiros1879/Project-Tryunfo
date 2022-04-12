@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Form extends Component {
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
-      cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled,
+      cardRare, cardTrunfo, isSaveButtonDisabled,
       onInputChange, onSaveButtonClick } = this.props;
     return (
       <div>
@@ -87,15 +87,12 @@ class Form extends Component {
             value={ cardRare }
             onChange={ onInputChange }
           >
-
             <option name="normal" value="normal">Normal</option>
             <option name="raro" value="raro">Raro</option>
             <option name="muito-raro" value="muito raro">Muito Raro</option>
           </select>
         </label>
-        {
-          (!hasTrunfo)
-        }
+
         <label htmlFor="trunfo">
           Marque se for um Super Tryunfo:
           <input
@@ -103,8 +100,7 @@ class Form extends Component {
             type="checkbox"
             data-testid="trunfo-input"
             id="trunfo"
-            checked
-            value={ cardTrunfo }
+            checked={ cardTrunfo }
             onChange={ onInputChange }
           />
         </label>
@@ -132,10 +128,9 @@ Form.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  hasTrunfo: PropTypes.bool.isRequired,
-  isSaveButtonDisabled: PropTypes.func.isRequired,
+  isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
-  onSaveButtonClick: PropTypes.bool.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
 };
 
 export default Form;
