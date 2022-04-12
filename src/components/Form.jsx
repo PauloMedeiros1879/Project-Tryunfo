@@ -41,6 +41,8 @@ class Form extends Component {
             id="attr1"
             value={ cardAttr1 }
             onChange={ onInputChange }
+            min="0"
+            max="90"
           />
         </label>
 
@@ -53,6 +55,8 @@ class Form extends Component {
             id="attr2"
             value={ cardAttr2 }
             onChange={ onInputChange }
+            min="0"
+            max="90"
           />
         </label>
 
@@ -65,6 +69,8 @@ class Form extends Component {
             id="attr3"
             value={ cardAttr3 }
             onChange={ onInputChange }
+            min="0"
+            max="90"
           />
         </label>
 
@@ -115,9 +121,9 @@ class Form extends Component {
 Form.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
-  cardAttr1: PropTypes.string.isRequired,
-  cardAttr2: PropTypes.string.isRequired,
-  cardAttr3: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.number.isRequired,
+  cardAttr2: PropTypes.number.isRequired,
+  cardAttr3: PropTypes.number.isRequired,
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   hasTrunfo: PropTypes.bool.isRequired,

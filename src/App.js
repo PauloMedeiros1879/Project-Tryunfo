@@ -13,8 +13,7 @@ class App extends React.Component {
       attr2: 0,
       attr3: 0,
       select: 'normal',
-      check: false,
-      hasTrunfo: false,
+      trunfo: false,
       // isSaveButtonDisabled: true,
     };
 
@@ -69,7 +68,7 @@ class App extends React.Component {
 
   render() {
     const { name, describe, attr1, attr2, attr3, img,
-      select, check, hasTrunfo } = this.state;
+      select, trunfo } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -82,10 +81,11 @@ class App extends React.Component {
           cardAttr3={ attr3 }
           cardImage={ img }
           cardRare={ select }
-          cardTrunfo={ check }
-          hasTrunfo={ hasTrunfo }
+          cardTrunfo={ trunfo }
+          hasTrunfo={ trunfo }
           onInputChange={ this.onInputChange }
         />
+
         <Card
           cardName={ name }
           cardDescription={ describe }
@@ -94,7 +94,7 @@ class App extends React.Component {
           cardAttr3={ attr3 }
           cardImage={ img }
           cardRare={ select }
-          cardTrunfo={ check }
+          cardTrunfo={ trunfo }
         />
       </div>
     );

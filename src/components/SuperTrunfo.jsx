@@ -8,7 +8,7 @@ class SuperTrunfo extends Component {
       <label htmlFor="trunfo">
         Marque se for um Super Tryunfo:
         <input
-          name="check"
+          name="trunfo"
           type="checkbox"
           data-testid="trunfo-input"
           id="trunfo"
