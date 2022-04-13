@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import ListAndButton from './components/ListAndButton';
 
 class App extends React.Component {
   constructor() {
@@ -14,12 +15,15 @@ class App extends React.Component {
       attr3: 0,
       select: 'normal',
       trunfo: false,
+      tryunCheck: false,
       isSaveButtonDisabled: true,
+      pack: [],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
-    // this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.formValidate = this.formValidate.bind(this);
+    this.checkin = this.checkin.bind(this);
   }
 
   onInputChange({ target }) {
@@ -29,23 +33,56 @@ class App extends React.Component {
     }, this.formValidate);
   }
 
-  // onSaveButtonClick(event) {
-  //   event.preventDefault();
-  //   const { name, describe, attr1, attr2, attr3, img, select, trunfo} = this.state;
-  //   if () {
-  //     this.setState(() => ({
-  //       name: '',
-  //       img: '',
-  //       describe: '',
-  //       attr1: 0,
-  //       attr2: 0,
-  //       attr3: 0,
-  //       select: 'normal',
-  //       trunfo: false,
-  //       isSaveButtonDisabled: true,
-  //     }));
-  //   }
-  // }
+  onSaveButtonClick(event) {
+    event.preventDefault();
+    const { name, describe, attr1, attr2, attr3, img, select, trunfo } = this.state;
+    if (trunfo) {
+      this.setState((beforeState) => ({
+        name: '',
+        img: '',
+        describe: '',
+        attr1: 0,
+        attr2: 0,
+        attr3: 0,
+        select: 'normal',
+        trunfo: false,
+        hasTrunfo: true,
+        isSaveButtonDisabled: true,
+        pack: [...beforeState.pack, {
+          name,
+          describe,
+          attr1,
+          attr2,
+          attr3,
+          img,
+          select,
+          trunfo,
+        }],
+      }));
+    } else {
+      this.setState((beforeState) => ({
+        name: '',
+        img: '',
+        describe: '',
+        attr1: 0,
+        attr2: 0,
+        attr3: 0,
+        select: 'normal',
+        trunfo: false,
+        isSaveButtonDisabled: true,
+        pack: [...beforeState.pack, {
+          name,
+          describe,
+          attr1,
+          attr2,
+          attr3,
+          img,
+          select,
+          trunfo,
+        }],
+      }));
+    }
+  }
 
   buttonValidate(attr, input) {
     const elements = attr.map((e) => Number(e));
@@ -84,39 +121,54 @@ class App extends React.Component {
     });
   }
 
+  checkin() {
+    this.setState({
+      tryunCheck: false,
+    });
+  }
+
   render() {
     const { name, describe, attr1, attr2, attr3, img,
-      select, trunfo, isSaveButtonDisabled } = this.state;
+      select, trunfo, isSaveButtonDisabled, tryunCheck, hasTrunfo, pack } = this.state;
     return (
-      <div>
-        <h1>Tryunfo</h1>
-        <h2>Adicionar nova carta</h2>
-        <Form
-          cardName={ name }
-          cardDescription={ describe }
-          cardAttr1={ attr1 }
-          cardAttr2={ attr2 }
-          cardAttr3={ attr3 }
-          cardImage={ img }
-          cardRare={ select }
-          cardTrunfo={ trunfo }
-          hasTrunfo={ trunfo }
-          onInputChange={ this.onInputChange }
-          // onSaveButtonClick={ this.onSaveButtonClick }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-        />
+      <main>
+        <header>
+          <h1>Tryunfo</h1>
+          <h2>Adicionar nova carta</h2>
+        </header>
+        <div>
+          <Form
+            cardName={ name }
+            cardDescription={ describe }
+            cardAttr1={ attr1 }
+            cardAttr2={ attr2 }
+            cardAttr3={ attr3 }
+            cardImage={ img }
+            cardRare={ select }
+            cardTrunfo={ trunfo }
+            hasTrunfo={ hasTrunfo }
+            tryunCheck={ tryunCheck }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+          />
 
-        <Card
-          cardName={ name }
-          cardDescription={ describe }
-          cardAttr1={ attr1 }
-          cardAttr2={ attr2 }
-          cardAttr3={ attr3 }
-          cardImage={ img }
-          cardRare={ select }
-          cardTrunfo={ trunfo }
+          <Card
+            cardName={ name }
+            cardDescription={ describe }
+            cardAttr1={ attr1 }
+            cardAttr2={ attr2 }
+            cardAttr3={ attr3 }
+            cardImage={ img }
+            cardRare={ select }
+            cardTrunfo={ trunfo }
+          />
+        </div>
+        <ListAndButton
+          pack={ pack }
+          checkin={ this.checkin }
         />
-      </div>
+      </main>
     );
   }
 }
