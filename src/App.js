@@ -123,7 +123,7 @@ class App extends React.Component {
 
   checkin() {
     this.setState({
-      tryunCheck: false,
+      hasTrunfo: false,
     });
   }
 
